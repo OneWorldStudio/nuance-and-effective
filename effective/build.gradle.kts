@@ -7,10 +7,10 @@ val effectiveMavenGroup: String by rootProject
 val minecraftVersion: String by rootProject
 
 plugins {
-    kotlin("jvm") version "2.0.21"
+    kotlin("jvm") version "2.2.21"
     id("io.github.pacifistmc.forgix") version "1.2.9"
-    id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "1.7-SNAPSHOT" apply false
+    id("architectury-plugin") version "3.5-SNAPSHOT"
+    id("dev.architectury.loom-no-remap") version "1.14-SNAPSHOT" apply false
     id("com.gradleup.shadow") version "8.3.6" apply false
 }
 
@@ -33,7 +33,7 @@ allprojects {
 subprojects {
     apply(plugin = "kotlin")
     apply(plugin = "architectury-plugin")
-    apply(plugin = "dev.architectury.loom")
+    apply(plugin = "dev.architectury.loom-no-remap")
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom").apply {
         silentMojangMappingsLicense()
@@ -54,10 +54,7 @@ subprojects {
 
     dependencies {
         "minecraft"("com.mojang:minecraft:$minecraftVersion")
-        @Suppress("UnstableApiUsage") "mappings"(loom.layered {
-            officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-1.21.1:2024.11.17@zip")
-        })
+        @Suppress("UnstableApiUsage") "mappings"(loom.officialMojangMappings())
     }
 
 }
