@@ -3,6 +3,7 @@ pluginManagement {
         id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
     }
     repositories {
+        mavenCentral()
         gradlePluginPortal()
         maven("https://maven.architectury.dev/")
         maven("https://maven.fabricmc.net/")
