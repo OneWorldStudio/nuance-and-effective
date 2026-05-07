@@ -1,5 +1,3 @@
-import org.gradle.internal.extensions.core.extra
-
 val neoForgeVersion: String by rootProject
 val mixinExtrasVersion: String by rootProject
 val kotlinForNeoForgeVersion: String by rootProject
@@ -39,26 +37,33 @@ repositories {
 }
 
 dependencies {
-    neoForge("net.neoforged:neoforge:$neoForgeVersion")
-    implementation("thedarkcolour:kotlinforforge-neoforge:$kotlinForNeoForgeVersion") {
+    "neoForge"("net.neoforged:neoforge:$neoForgeVersion")
+    "implementation"("thedarkcolour:kotlinforforge-neoforge:$kotlinForNeoForgeVersion") {
         exclude(group = "net.neoforged.fancymodloader", module = "loader")
     }
 //    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:$mixinExtrasVersion")!!)
 //    implementation(include("io.github.llamalad7:mixinextras-forge:$mixinExtrasVersion")!!)
 
-    modLocalRuntime("curse.maven:configured-457570:$configuredForgeVersion")
-    implementation("dev.upcraft.sparkweave:Sparkweave-NeoForge:$sparkweaveVersion")
-    implementation("dev.cammiescorner.velvet:Velvet-NeoForge:$velvetVersion")
+    "modLocalRuntime"("curse.maven:configured-457570:$configuredForgeVersion")
+    "implementation"("dev.upcraft.sparkweave:Sparkweave-NeoForge:$sparkweaveVersion")
+    "implementation"("dev.cammiescorner.velvet:Velvet-NeoForge:$velvetVersion")
 
-    common(project(":effective:common", "namedElements")) { isTransitive = false }
-    shadowCommon(project(":effective:common", "transformProductionNeoForge")) { isTransitive = false }
+    "common"(project(":effective:common", "namedElements")) { isTransitive = false }
+    "shadowCommon"(project(":effective:common", "transformProductionNeoForge")) { isTransitive = false }
 }
 
 tasks.processResources {
+    inputs.property("name", rootProject.property("effectiveModName"))
     inputs.property("version", project.version)
+    inputs.property("description", project.description)
     filesMatching("META-INF/neoforge.mods.toml") {
-        expand(mapOf("name" to rootProject.extra["effectiveModName"], "version" to project.extra["effectiveModVersion"],
-            "description" to project.description))
+        expand(
+            mapOf(
+                "name" to rootProject.property("effectiveModName"),
+                "version" to project.version,
+                "description" to project.description,
+            )
+        )
     }
 }
 
