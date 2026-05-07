@@ -1,7 +1,3 @@
-plugins {
-    id("dev.architectury.loom-no-remap")
-}
-
 val enabledPlatforms: String by rootProject
 val fabricLoaderVersion: String by rootProject
 val forgeConfigApiPortVersion: String by rootProject
