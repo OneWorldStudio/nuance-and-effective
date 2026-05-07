@@ -1,5 +1,3 @@
-import org.gradle.internal.extensions.core.extra
-
 val fabricLoaderVersion: String by rootProject
 val forgeConfigApiPortVersion: String by rootProject
 
@@ -29,15 +27,17 @@ dependencies {
 }
 
 tasks.processResources {
-//    inputs.property("version", project.version)
-//    inputs.property("description", project.description)
-//    inputs.property("name", rootProject.extra["effectiveModName"])
+    inputs.property("name", rootProject.property("effectiveModName"))
+    inputs.property("version", project.version)
+    inputs.property("description", project.description)
     filesMatching("fabric.mod.json") {
-        expand(mapOf(
-            "name" to rootProject.extra["effectiveModName"],
-            "version" to project.version,
-            "description" to project.description
-        ))
+        expand(
+            mapOf(
+                "name" to rootProject.property("effectiveModName"),
+                "version" to project.version,
+                "description" to project.description,
+            )
+        )
     }
 }
 
