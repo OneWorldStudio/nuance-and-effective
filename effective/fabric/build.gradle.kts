@@ -20,10 +20,10 @@ configurations {
 }
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
-    modApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:$forgeConfigApiPortVersion")
-    common(project(":effective:common", "namedElements")) { isTransitive = false }
-    shadowCommon(project(":effective:common", "transformProductionFabric")) { isTransitive = false }
+    "modImplementation"("net.fabricmc:fabric-loader:$fabricLoaderVersion")
+    "modApi"("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:$forgeConfigApiPortVersion")
+    "common"(project(":effective:common", "namedElements")) { isTransitive = false }
+    "shadowCommon"(project(":effective:common", "transformProductionFabric")) { isTransitive = false }
 }
 
 tasks.processResources {

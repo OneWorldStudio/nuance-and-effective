@@ -37,19 +37,19 @@ repositories {
 }
 
 dependencies {
-    neoForge("net.neoforged:neoforge:$neoForgeVersion")
-    implementation("thedarkcolour:kotlinforforge-neoforge:$kotlinForNeoForgeVersion") {
+    "neoForge"("net.neoforged:neoforge:$neoForgeVersion")
+    "implementation"("thedarkcolour:kotlinforforge-neoforge:$kotlinForNeoForgeVersion") {
         exclude(group = "net.neoforged.fancymodloader", module = "loader")
     }
 //    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:$mixinExtrasVersion")!!)
 //    implementation(include("io.github.llamalad7:mixinextras-forge:$mixinExtrasVersion")!!)
 
-    modLocalRuntime("curse.maven:configured-457570:$configuredForgeVersion")
-    implementation("dev.upcraft.sparkweave:Sparkweave-NeoForge:$sparkweaveVersion")
-    implementation("dev.cammiescorner.velvet:Velvet-NeoForge:$velvetVersion")
+    "modLocalRuntime"("curse.maven:configured-457570:$configuredForgeVersion")
+    "implementation"("dev.upcraft.sparkweave:Sparkweave-NeoForge:$sparkweaveVersion")
+    "implementation"("dev.cammiescorner.velvet:Velvet-NeoForge:$velvetVersion")
 
-    common(project(":effective:common", "namedElements")) { isTransitive = false }
-    shadowCommon(project(":effective:common", "transformProductionNeoForge")) { isTransitive = false }
+    "common"(project(":effective:common", "namedElements")) { isTransitive = false }
+    "shadowCommon"(project(":effective:common", "transformProductionNeoForge")) { isTransitive = false }
 }
 
 tasks.processResources {
