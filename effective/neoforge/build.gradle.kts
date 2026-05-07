@@ -1,5 +1,3 @@
-import org.gradle.internal.extensions.core.extra
-
 val neoForgeVersion: String by rootProject
 val mixinExtrasVersion: String by rootProject
 val kotlinForNeoForgeVersion: String by rootProject
@@ -55,10 +53,17 @@ dependencies {
 }
 
 tasks.processResources {
+    inputs.property("name", rootProject.property("effectiveModName"))
     inputs.property("version", project.version)
+    inputs.property("description", project.description)
     filesMatching("META-INF/neoforge.mods.toml") {
-        expand(mapOf("name" to rootProject.extra["effectiveModName"], "version" to project.extra["effectiveModVersion"],
-            "description" to project.description))
+        expand(
+            mapOf(
+                "name" to rootProject.property("effectiveModName"),
+                "version" to project.version,
+                "description" to project.description,
+            )
+        )
     }
 }
 
