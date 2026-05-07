@@ -1,5 +1,3 @@
-import net.fabricmc.loom.api.LoomGradleExtensionAPI
-
 val effectiveModId: String by project
 val effectiveModVersion: String by rootProject
 val effectiveMavenGroup: String by rootProject
@@ -28,8 +26,14 @@ subprojects {
     apply(plugin = "architectury-plugin")
     apply(plugin = "dev.architectury.loom-no-remap")
 
-    val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom").apply {
-        silentMojangMappingsLicense()
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(25))
+        }
+    }
+
+    kotlin {
+        jvmToolchain(25)
     }
 
     java {
@@ -58,7 +62,6 @@ subprojects {
 
     dependencies {
         "minecraft"("com.mojang:minecraft:$minecraftVersion")
-        @Suppress("UnstableApiUsage") "mappings"(loom.officialMojangMappings())
     }
 
 }
