@@ -36,6 +36,16 @@ subprojects {
         jvmToolchain(25)
     }
 
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(25))
+        }
+    }
+
+    kotlin {
+        jvmToolchain(25)
+    }
+
     base {
         archivesName = "$effectiveModId-${project.name}"
     }
